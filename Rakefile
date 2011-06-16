@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "taskmaster"
   gem.homepage = "http://github.com/bscofield/taskmaster"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Make your Ruby classes cron-aware}
+  gem.description = %Q{Taskmaster allows you to easily make your Ruby classes aware of cron.}
   gem.email = "git@turrean.com"
   gem.authors = ["Ben Scofield"]
   # dependencies defined in Gemfile

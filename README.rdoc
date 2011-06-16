@@ -1,9 +1,33 @@
 = taskmaster
 
-Description goes here.
+Make your Ruby classes cron-aware!
+
+
+== Example
+
+```
+require 'taskmaster'
+
+class FootSoldier
+  include Taskmaster::Henchman
+
+  every 10.minutes, :at => 5
+
+  def self.run
+    # do super cool and important stuff
+  end
+end
+
+puts FootSoldier.cron_output # => "5,15,25,35,45,55 * * * * /bin/bash -l -c 'cd /... && script/runner -e production '\''BulkTask.run'\'''"
+```
+
+== TODO
+
+* figure out different task types
+* add a Rake task to output and save crontab for all Taskmaster-including classes (fall back to whenever)
 
 == Contributing to taskmaster
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project

@@ -9,7 +9,7 @@ namespace :taskmaster do
 
   desc "Write the generated crontab to config/schedule.rb -- suitable for whenever to write it to the system"
   task :write do
-    output = Taskmaster.cron_output
+    output = Taskmaster.aggregate_whenever
     FileUtils.mkdir_p 'config'
     FileUtils.touch   'config/schedule.rb'
     File.open('config/schedule.rb', File::WRONLY) do |file|

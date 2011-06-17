@@ -30,6 +30,10 @@ end"
       def cron_output
         Whenever::JobList.new(@scheduled_jobs.join("\n")).generate_cron_output
       end
+
+      def scheduled_jobs
+        @scheduled_jobs
+      end
     end
   end
 end

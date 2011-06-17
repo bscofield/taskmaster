@@ -14,8 +14,35 @@ class TestTaskmaster < Test::Unit::TestCase
     end
   end
 
+  def test_taskmaster_should_know_generated_whenever_syntax
+    expected = <<-WHENEVERSYNTAX
+every 600, {} do
+  runner 'FootSoldier.run'
+end
+every 3600, {} do
+  runner 'SpecialSoldier.specialty'
+end
+every 60, {} do
+  runner 'MultiSoldier.run'
+end
+every 3600, {} do
+  runner 'MultiSoldier.specialty'
+end
+every 3600, {:at=>20} do
+  runner 'SpecificSoldier.run'
+end
+every 3600, {} do
+  command 'CommandSoldier.run'
+end
+every 3600, {} do
+  command 'FrequencySoldier.run'
+end
+WHENEVERSYNTAX
+    assert_equal expected.strip, Taskmaster.aggregate_whenever.strip
+  end
+
   def test_taskmaster_should_know_all_output
-    output = Taskmaster.raw_output
+    output = Taskmaster.aggregate
 
     assert_equal "0,10,20,30,40,50 * * * * /bin/bash -l -c 'cd /Users/benscofield/personal/util/taskmaster && script/runner -e production '\\''FootSoldier.run'\\'''", output['FootSoldier']
     assert_equal "0 * * * * /bin/bash -l -c 'cd /Users/benscofield/personal/util/taskmaster && script/runner -e production '\\''SpecialSoldier.specialty'\\'''", output['SpecialSoldier']
@@ -34,31 +61,31 @@ class TestTaskmaster < Test::Unit::TestCase
 
     def test_taskmaster_should_generate_sectioned_crontab_format
       expected = <<-OUTOUTDAMNEDSPOT
-### begin Taskmaster cron for hydra - FootSoldier
+#-- begin Taskmaster cron for hydra - FootSoldier
 0,10,20,30,40,50 * * * * /bin/bash -l -c 'cd /Users/benscofield/personal/util/taskmaster && script/runner -e production '\\''FootSoldier.run'\\'''
-### end Taskmaster cron for hydra - FootSoldier
+#-- end Taskmaster cron for hydra - FootSoldier
 
-### begin Taskmaster cron for hydra - SpecialSoldier
+#-- begin Taskmaster cron for hydra - SpecialSoldier
 0 * * * * /bin/bash -l -c 'cd /Users/benscofield/personal/util/taskmaster && script/runner -e production '\\''SpecialSoldier.specialty'\\'''
-### end Taskmaster cron for hydra - SpecialSoldier
+#-- end Taskmaster cron for hydra - SpecialSoldier
 
-### begin Taskmaster cron for hydra - MultiSoldier
+#-- begin Taskmaster cron for hydra - MultiSoldier
 * * * * * /bin/bash -l -c 'cd /Users/benscofield/personal/util/taskmaster && script/runner -e production '\\''MultiSoldier.run'\\'''
 
 0 * * * * /bin/bash -l -c 'cd /Users/benscofield/personal/util/taskmaster && script/runner -e production '\\''MultiSoldier.specialty'\\'''
-### end Taskmaster cron for hydra - MultiSoldier
+#-- end Taskmaster cron for hydra - MultiSoldier
 
-### begin Taskmaster cron for hydra - SpecificSoldier
+#-- begin Taskmaster cron for hydra - SpecificSoldier
 20 * * * * /bin/bash -l -c 'cd /Users/benscofield/personal/util/taskmaster && script/runner -e production '\\''SpecificSoldier.run'\\'''
-### end Taskmaster cron for hydra - SpecificSoldier
+#-- end Taskmaster cron for hydra - SpecificSoldier
 
-### begin Taskmaster cron for hydra - CommandSoldier
+#-- begin Taskmaster cron for hydra - CommandSoldier
 0 * * * * /bin/bash -l -c 'CommandSoldier.run'
-### end Taskmaster cron for hydra - CommandSoldier
+#-- end Taskmaster cron for hydra - CommandSoldier
 
-### begin Taskmaster cron for hydra - FrequencySoldier
+#-- begin Taskmaster cron for hydra - FrequencySoldier
 0 * * * * /bin/bash -l -c 'FrequencySoldier.run'
-### end Taskmaster cron for hydra - FrequencySoldier
+#-- end Taskmaster cron for hydra - FrequencySoldier
 OUTOUTDAMNEDSPOT
 
       assert_equal expected, Taskmaster.cron_output

@@ -4,13 +4,22 @@ require 'taskmaster/henchman'
 require 'taskmaster/railtie'
 
 module Taskmaster
-  def self.raw_output
+  def self.aggregate
     load_rails_models
     hash = Henchman.included_in.inject({}) do |hash, klass|
       hash[klass.name] = klass.cron_output.strip
       hash
     end
-      hash
+    hash
+  end
+
+  def self.aggregate_whenever
+    load_rails_models
+    array = Henchman.included_in.inject([]) do |arr, klass|
+      arr << klass.scheduled_jobs
+      arr
+    end
+    array.flatten.join("\n")
   end
 
   def self.section(key, cron)
@@ -22,7 +31,7 @@ module Taskmaster
   end
 
   def self.cron_output
-    load_rails_models
+    raw_output = aggregate
     raw_output.keys.map { |key| section(key, raw_output[key]) }.join("\n")
   end
 

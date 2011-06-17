@@ -32,3 +32,13 @@ class MultiSoldier
     # do something cool
   end
 end
+
+class SpecificSoldier
+  include Taskmaster::Henchman
+
+  every 1.hour, :at => 20
+
+  def self.run
+    # get beaten up by a superhero
+  end
+end

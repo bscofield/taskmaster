@@ -23,4 +23,8 @@ class TestHenchman < Test::Unit::TestCase
     assert_equal "* * * * * /bin/bash -l -c 'cd /Users/benscofield/personal/util/taskmaster && script/runner -e production '\\''MultiSoldier.run'\\'''", output[0]
     assert_equal "0 * * * * /bin/bash -l -c 'cd /Users/benscofield/personal/util/taskmaster && script/runner -e production '\\''MultiSoldier.specialty'\\'''", output[1]
   end
+
+  def test_specificoldier_should_have_expected_cron_output
+    assert_equal "20 * * * * /bin/bash -l -c 'cd /Users/benscofield/personal/util/taskmaster && script/runner -e production '\\''SpecificSoldier.run'\\'''", SpecificSoldier.cron_output.strip
+  end
 end

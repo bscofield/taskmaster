@@ -1,6 +1,5 @@
 require 'whenever'
 
-require 'taskmaster/command_line'
 require 'taskmaster/henchman'
 require 'taskmaster/railtie'
 

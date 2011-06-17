@@ -5,6 +5,8 @@ Make your Ruby classes cron-aware!
 
 == Example
 
+The base case is simple -- just include the `Taskmaster::Henchman` module, define a `run` class method, and use `whenever` syntax to specify when and how often the method should run:
+
     require 'taskmaster'
 
     class FootSoldier
@@ -18,6 +20,16 @@ Make your Ruby classes cron-aware!
     end
 
     puts FootSoldier.cron_output # => "5,15,25,35,45,55 * * * * /bin/bash -l -c 'cd /... && script/runner -e production '\''BulkTask.run'\'''"
+
+You can override various pieces of this, including the name of the class method to run:
+
+    every 10.minutes, :run => :special_method
+
+    def self.special_method
+      # I'm not the default!
+    end
+
+Check the documentation on `Taskmaster::Henchman.every` for details on all the allowed options.
 
 == TODO
 

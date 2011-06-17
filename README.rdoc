@@ -33,7 +33,7 @@ Check the documentation on `Taskmaster::Henchman.every` for details on all the a
 
 == TODO
 
-* add a binary script to fall back to whenever (for writing/updating crontab)
+* Update the README
 
 == Contributing to taskmaster
 

@@ -16,7 +16,7 @@ module Taskmaster
   def self.aggregate_whenever
     load_rails_models
     array = Henchman.included_in.inject([]) do |arr, klass|
-      arr << klass.scheduled_jobs
+      arr += klass.scheduled_jobs.map(&:whenever_source)
       arr
     end
     array.flatten.join("\n")

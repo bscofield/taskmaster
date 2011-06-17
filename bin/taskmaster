@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'optparse'
+require 'taskmaster'
+
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: taskmaster [options]"
+  opts.on('-i', '--update-crontab') { options[:update] = true }
+  opts.on('-w', '--write-crontab')  { options[:write] = true }
+  opts.on('-c', '--clear-crontab')  { options[:clear] = true }
+  opts.on('-s', '--set [variables]', 'Example: --set environment=staging&path=/my/sweet/path') do |set|
+    options[:set] = set if set
+  end
+  opts.on('-u', '--user [user]', 'Default: current user') do |user|
+    options[:user] = user if user
+  end
+  opts.on('-k', '--cut [lines]', 'Cut lines from the top of the cronfile') do |lines|
+    options[:cut] = lines.to_i if lines
+  end
+  opts.on('-v', '--version') { puts "Taskmaster v#{Taskmaster::VERSION}"; exit(0) }
+end.parse!
+
+Taskmaster::CommandLine.execute(options)

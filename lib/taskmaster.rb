@@ -1,5 +1,6 @@
 require 'whenever'
 
+require 'taskmaster/command_line'
 require 'taskmaster/henchman'
 require 'taskmaster/railtie'
 
@@ -15,9 +16,9 @@ module Taskmaster
 
   def self.section(key, cron)
     buffer = []
-    buffer << "### begin Taskmaster cron for #{application} - #{key}"
+    buffer << "#-- begin Taskmaster cron for #{application} - #{key}"
     buffer << cron
-    buffer << "### end Taskmaster cron for #{application} - #{key}\n"
+    buffer << "#-- end Taskmaster cron for #{application} - #{key}\n"
     buffer
   end
 

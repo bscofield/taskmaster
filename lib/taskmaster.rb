@@ -1,6 +1,6 @@
 require 'whenever'
 
-require './lib/taskmaster/henchman'
+require 'taskmaster/henchman'
 
 module Taskmaster
   def self.cron_output

@@ -14,9 +14,10 @@ module Taskmaster
     module ClassMethods
       def every(frequency, options = {})
         @scheduled_jobs ||= []
-        method = options.delete(:run) || :run
+        method  = options.delete(:run) || :run
+        command = options.delete(:command) || :runner
         @scheduled_jobs << "every #{frequency.to_s}, #{options.inspect} do
-  runner \'#{self.name}.#{method.to_s}\'
+  #{command.to_s} \'#{self.name}.#{method.to_s}\'
 end"
       end
 

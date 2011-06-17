@@ -42,3 +42,13 @@ class SpecificSoldier
     # get beaten up by a superhero
   end
 end
+
+class CommandSoldier
+  include Taskmaster::Henchman
+
+  every 1.hour, :command => :command
+
+  def self.run
+    # nothing to see here
+  end
+end

@@ -13,8 +13,9 @@ module Taskmaster
 
     module ClassMethods
       def every(frequency, options = {})
+        @scheduled_jobs ||= []
         method = options.delete(:run) || :run
-        @schedule = "every #{frequency.to_s}, #{options.inspect} do
+        @scheduled_jobs << "every #{frequency.to_s}, #{options.inspect} do
   runner \'#{self.name}.#{method.to_s}\'
 end"
       end
@@ -24,7 +25,7 @@ end"
       end
 
       def cron_output
-        Whenever::JobList.new(@schedule).generate_cron_output
+        Whenever::JobList.new(@scheduled_jobs.join("\n")).generate_cron_output
       end
     end
   end

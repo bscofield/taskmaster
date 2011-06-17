@@ -8,12 +8,27 @@ class FootSoldier
   end
 end
 
-class MultiSoldier
+class SpecialSoldier
   include Taskmaster::Henchman
 
   every 1.hour, :run => :specialty
 
   def self.specialty
     # run this one
+  end
+end
+
+class MultiSoldier
+  include Taskmaster::Henchman
+
+  every 1.minute
+  every 1.hour, :run => :specialty
+
+  def self.specialty
+    # run this one
+  end
+
+  def self.run
+    # do something cool
   end
 end

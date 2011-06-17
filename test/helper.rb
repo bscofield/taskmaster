@@ -17,4 +17,7 @@ require 'taskmaster'
 require 'classes/foot_soldier'
 
 class Test::Unit::TestCase
+  def whenever_cd_path
+    File.expand_path(__FILE__ + '/../..')
+  end
 end

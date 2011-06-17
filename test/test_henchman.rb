@@ -31,4 +31,8 @@ class TestHenchman < Test::Unit::TestCase
   def test_different_whenever_commands_should_be_usable
     assert_equal "0 * * * * /bin/bash -l -c 'CommandSoldier.run'", CommandSoldier.cron_output.strip
   end
+
+  def test_whenever_alternative_names_should_be_usable
+    assert_equal "0 * * * * /bin/bash -l -c 'FrequencySoldier.run'", FrequencySoldier.cron_output.strip
+  end
 end

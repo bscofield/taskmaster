@@ -13,15 +13,17 @@ module Taskmaster
       hash
   end
 
+  def self.section(key, cron)
+    buffer = []
+    buffer << "### begin Taskmaster cron for #{application} - #{key}"
+    buffer << cron
+    buffer << "### end Taskmaster cron for #{application} - #{key}\n"
+    buffer
+  end
+
   def self.cron_output
     load_rails_models
-    buffer = []
-    raw_output.keys.each do |key|
-      buffer << "### begin Taskmaster cron for #{application} - #{key}"
-      buffer << raw_output[key]
-      buffer << "### end Taskmaster cron for #{application} - #{key}\n"
-    end
-    buffer.join("\n")
+    raw_output.keys.map { |key| section(key, raw_output[key]) }.join("\n")
   end
 
   def self.application

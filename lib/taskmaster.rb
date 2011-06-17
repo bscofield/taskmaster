@@ -15,7 +15,13 @@ module Taskmaster
 
   def self.cron_output
     load_rails_models
-    raw_output
+    buffer = []
+    raw_output.keys.each do |key|
+      buffer << "### begin Taskmaster cron for #{application} - #{key}"
+      buffer << raw_output[key]
+      buffer << "### end Taskmaster cron for #{application} - #{key}\n"
+    end
+    buffer.join("\n")
   end
 
   def self.application

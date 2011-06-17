@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{taskmaster}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ben Scofield"]
-  s.date = %q{2011-06-16}
+  s.date = %q{2011-06-17}
   s.description = %q{Taskmaster allows you to easily make your Ruby classes aware of cron.}
   s.email = %q{git@turrean.com}
   s.extra_rdoc_files = [
@@ -25,7 +25,9 @@ Gem::Specification.new do |s|
     "VERSION",
     "lib/taskmaster.rb",
     "lib/taskmaster/henchman.rb",
+    "lib/taskmaster/railtie.rb",
     "lib/tasks/taskmaster.rake",
+    "rails/init.rb",
     "taskmaster.gemspec",
     "test/classes/foot_soldier.rb",
     "test/helper.rb",

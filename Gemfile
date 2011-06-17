@@ -4,7 +4,7 @@ source "http://rubygems.org"
 #   gem "activesupport", ">= 2.3.5"
 
 gem 'whenever'
-gem 'activesupport', '~> 2.3'
+gem 'activesupport'
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.

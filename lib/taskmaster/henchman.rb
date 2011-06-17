@@ -1,3 +1,5 @@
+require 'taskmaster'
+
 module Taskmaster
   module Henchman
     def self.included(base)

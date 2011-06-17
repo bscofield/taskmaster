@@ -1,6 +1,7 @@
 require 'whenever'
 
 require 'taskmaster/henchman'
+require 'taskmaster/railtie'
 
 module Taskmaster
   def self.cron_output

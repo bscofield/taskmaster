@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "lib/taskmaster.rb",
     "lib/taskmaster/henchman.rb",
+    "lib/tasks/taskmaster.rake",
     "taskmaster.gemspec",
     "test/foot_soldier.rb",
     "test/helper.rb",

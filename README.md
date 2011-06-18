@@ -6,30 +6,28 @@ Make your Ruby classes cron-aware! Taskmaster is a wrapper around the [whenever]
 
 The base case is simple -- just include the `Taskmaster::Henchman` module, define a `run` class method, and use `whenever` syntax to specify when and how often the method should run:
 
-```
-require 'taskmaster'
+    require 'taskmaster'
 
-class FootSoldier
-  include Taskmaster::Henchman
+    class FootSoldier
+      include Taskmaster::Henchman
 
-  every 10.minutes, :at => 5
+      every 10.minutes, :at => 5
 
-  def self.run
-    # do super cool and important stuff
-  end
-end
+      def self.run
+        # do super cool and important stuff
+      end
+    end
 
-puts FootSoldier.cron_output # => "5,15,25,35,45,55 * * * * /bin/bash -l -c 'cd /... && script/runner -e production '\''BulkTask.run'\'''"
-```
+    puts FootSoldier.cron_output # => "5,15,25,35,45,55 * * * * /bin/bash -l -c 'cd /... && script/runner -e production '\''BulkTask.run'\'''"
+
+For details on the options accepted by `every`, see the documentation for {Taskmaster::Henchman::ClassMethods#every}.
 
 To actually use this in production, though, you'll want to rely on the `taskmaster:write` Rake task. Once you've defined your various jobs in the classes:
 
-```
-$ rake taskmaster:write
-Your crontab has been written to config/schedule.rb. Please use the whenever script to write it to your system crontab.
-$ whenever --write
-[write] crontab file written
-```
+    $ rake taskmaster:write
+    Your crontab has been written to config/schedule.rb. Please use the whenever script to write it to your system crontab.
+    $ whenever --write
+    [write] crontab file written
 
 ## Contributing to taskmaster
 

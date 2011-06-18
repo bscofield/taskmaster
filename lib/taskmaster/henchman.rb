@@ -39,11 +39,6 @@ end}
       def every(frequency, options = {})
         @scheduled_jobs ||= []
         @scheduled_jobs << ScheduledJob.new(frequency, self, options)
-#         method  = options.delete(:run) || :run
-#         command = options.delete(:command) || :runner
-#         @scheduled_jobs << "every #{frequency.to_s}, #{options.inspect} do
-#   #{command.to_s} \'#{self.name}.#{method.to_s}\'
-# end"
       end
 
       def run

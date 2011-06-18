@@ -15,4 +15,6 @@ group :development do
   gem "rcov", ">= 0"
   gem "rake", "0.8.7"
   gem "mocha", "~> 0.9"
+  gem "yard", "~> 0.6.0"
+  gem "bluecloth", "~> 2.1.0"
 end

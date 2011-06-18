@@ -1,9 +1,9 @@
-= taskmaster
+# taskmaster
 
 Make your Ruby classes cron-aware!
 
 
-== Example
+## Example
 
 The base case is simple -- just include the `Taskmaster::Henchman` module, define a `run` class method, and use `whenever` syntax to specify when and how often the method should run:
 
@@ -31,11 +31,11 @@ You can override various pieces of this, including the name of the class method 
 
 Check the documentation on `Taskmaster::Henchman.every` for details on all the allowed options.
 
-== TODO
+## TODO
 
 * Update the README
 
-== Contributing to taskmaster
+## Contributing to taskmaster
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
@@ -45,7 +45,7 @@ Check the documentation on `Taskmaster::Henchman.every` for details on all the a
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-== Copyright
+## Copyright
 
 Copyright (c) 2011 Ben Scofield. See LICENSE.txt for
 further details.

@@ -1,7 +1,7 @@
 require 'fileutils'
 
 namespace :taskmaster do
-  desc "Preview the generated crontab"
+  desc "Preview the crontab for your defined jobs"
   task :preview do
     output = Taskmaster.cron_output
     puts output

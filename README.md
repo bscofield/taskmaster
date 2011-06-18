@@ -1,39 +1,35 @@
 # taskmaster
 
-Make your Ruby classes cron-aware!
-
+Make your Ruby classes cron-aware! Taskmaster is a wrapper around the [whenever](https://rubygems.org/gems/whenever) gem that allows you to define your cron jobs within arbitrary Ruby classes, keeping those declarations next to the logic they rely on.
 
 ## Example
 
 The base case is simple -- just include the `Taskmaster::Henchman` module, define a `run` class method, and use `whenever` syntax to specify when and how often the method should run:
 
-    require 'taskmaster'
+```
+require 'taskmaster'
 
-    class FootSoldier
-      include Taskmaster::Henchman
+class FootSoldier
+  include Taskmaster::Henchman
 
-      every 10.minutes, :at => 5
+  every 10.minutes, :at => 5
 
-      def self.run
-        # do super cool and important stuff
-      end
-    end
+  def self.run
+    # do super cool and important stuff
+  end
+end
 
-    puts FootSoldier.cron_output # => "5,15,25,35,45,55 * * * * /bin/bash -l -c 'cd /... && script/runner -e production '\''BulkTask.run'\'''"
+puts FootSoldier.cron_output # => "5,15,25,35,45,55 * * * * /bin/bash -l -c 'cd /... && script/runner -e production '\''BulkTask.run'\'''"
+```
 
-You can override various pieces of this, including the name of the class method to run:
+To actually use this in production, though, you'll want to rely on the `taskmaster:write` Rake task. Once you've defined your various jobs in the classes:
 
-    every 10.minutes, :run => :special_method
-
-    def self.special_method
-      # I'm not the default!
-    end
-
-Check the documentation on `Taskmaster::Henchman.every` for details on all the allowed options.
-
-## TODO
-
-* Update the README
+```
+$ rake taskmaster:write
+Your crontab has been written to config/schedule.rb. Please use the whenever script to write it to your system crontab.
+$ whenever --write
+[write] crontab file written
+```
 
 ## Contributing to taskmaster
 
@@ -47,6 +43,5 @@ Check the documentation on `Taskmaster::Henchman.every` for details on all the a
 
 ## Copyright
 
-Copyright (c) 2011 Ben Scofield. See LICENSE.txt for
-further details.
+Copyright (c) 2011 Ben Scofield. See LICENSE.txt for further details.
 

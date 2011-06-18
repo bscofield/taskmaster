@@ -46,7 +46,7 @@ end
 class CommandSoldier
   include Taskmaster::Henchman
 
-  every 1.hour, :command => :command
+  every 1.hour, :with => :command
 
   def self.run
     # nothing to see here
@@ -56,7 +56,7 @@ end
 class FrequencySoldier
   include Taskmaster::Henchman
 
-  every 1.hour, :command => :command
+  every 1.hour, :with => :command
 
   def self.run
     # nothing to see here
